@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import { loginApi } from "../api/authApi";
+import { useDispatch } from "react-redux";
+import { login } from "../store/userSlice";
 
 import * as yup from "yup";
 
@@ -22,11 +22,6 @@ const schema = yup.object().shape({
     .max(30, "密碼不可超過 30 碼"),
 });
 
-// 模擬帳號資料
-const userList = [
-  { username: "admin", password: "1234", token: "aaa" },
-  { username: "kimi", password: "5678", token: "bbb" },
-];
 
 function Login() {
   const {
@@ -38,13 +33,12 @@ function Login() {
   });
 
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
     try {
-      const result = await loginApi(data.username, data.password);
-      login(result);
-      navigate("/dashboard");
+      await dispatch(login({ username: data.username, password: data.password })).unwrap();
+      navigate('/dashboard');
     } catch (err) {
       alert(err);
     }

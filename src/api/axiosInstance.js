@@ -1,14 +1,20 @@
-import axios from "axios";
+import axios from 'axios';
+import store from '../store';
 
 const instance = axios.create({
-  baseURL: "http://localhost:5015/api",
+  baseURL: import.meta.env.VITE_API_URL,
   timeout: 5000,
 });
 
-instance.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-  if (token) config.headers.Authorization = `Bearer ${token}`;
-  return config;
-});
+instance.interceptors.request.use(
+  (config) => {
+    const { token } = store.getState().user;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 export default instance;
