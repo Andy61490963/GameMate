@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { Provider } from "react-redux";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { AuthProvider } from "./context/AuthContext";
+import store from "./store";
 
 function App() {
   return (
-    <AuthProvider>
+    <Provider store={store}>
       <Router>
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
@@ -21,7 +22,7 @@ function App() {
           />
         </Routes>
       </Router>
-    </AuthProvider>
+    </Provider>
   );
 }
 
