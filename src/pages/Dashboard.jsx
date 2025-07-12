@@ -15,6 +15,7 @@ function Dashboard() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-green-100">
       <h1 className="text-3xl font-bold text-green-800 mb-4">歡迎 {username} 這是 Dashboard 頁面</h1>
+      <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
       <button
         onClick={handleLogout}
         className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
