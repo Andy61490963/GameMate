@@ -16,8 +16,8 @@ export default function Navbar() {
   const dispatch = useDispatch();
 
   const NAV_LINKS = [
-    { path: "/", label: "首頁" },
-    { path: "/about", label: "關於我們" },
+    { path: "/card", label: "隨機抽卡" },
+    { path: "/about", label: "加入房間" },
     { path: "/dashboard", label: "控制台" },
   ];
 
