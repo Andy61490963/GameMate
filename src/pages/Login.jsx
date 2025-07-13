@@ -161,19 +161,19 @@ function Login() {
         <div className="flex items-center justify-center bg-gray-100 p-4">
           <div className="md:flex items-center justify-center bg-gray-100 p-4">
             <div className="group relative">
-      <figure>
-        <img
-          src="https://cdn.cybassets.com/s/files/18929/ckeditor/pictures/content_679f61eb-3abb-46f5-bee8-00c0dc8e9725.jpg"
-          alt="可愛貓咪"
-          className="w-72 md:w-96 h-auto rounded-lg cursor-pointer"
-        />
-      </figure>
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 group-hover:flex">
-        <div className="bg-orange-200 text-orange-600 font-bold px-3 py-1 rounded-full animate-bounce shadow">
-          我想要吃罐罐😿
-        </div>
-      </div>
-    </div>
+              <figure>
+                <img
+                  src="https://cdn.cybassets.com/s/files/18929/ckeditor/pictures/content_679f61eb-3abb-46f5-bee8-00c0dc8e9725.jpg"
+                  alt="可愛貓咪"
+                  className="w-72 md:w-96 h-auto rounded-lg cursor-pointer"
+                />
+              </figure>
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 group-hover:flex">
+                <div className="bg-orange-200 text-orange-600 font-bold px-3 py-1 rounded-full animate-bounce shadow">
+                  我想要吃罐罐😿
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

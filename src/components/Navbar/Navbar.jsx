@@ -7,63 +7,68 @@ import feather from "feather-icons";
 import ThemeSwitcher from "./ThemeSwitcher";
 import NotificationDropdown from "./NotificationDropdown";
 import UserDropdown from "./UserDropdown";
+import Menu from "./Menu";
+import MobileMenu from "./MobileMenu";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const token = useSelector((state) => state.user.token);
   const dispatch = useDispatch();
 
+  const NAV_LINKS = [
+    { path: "/", label: "首頁" },
+    { path: "/about", label: "關於我們" },
+    { path: "/dashboard", label: "控制台" },
+  ];
+
   useEffect(() => {
     feather.replace();
   }, [isOpen]);
 
   return (
-    <header className="pc-header shadow bg-black z-50">
-      <div className="header-wrapper flex max-sm:px-[15px] px-[25px] grow justify-between items-center h-16">
-        {/* Left - Mobile Menu Button + Logo */}
-        <div className="flex items-center gap-2">
-          <button className="pc-head-link lg:hidden" onClick={() => setIsOpen(!isOpen)}>
-            <i data-feather="menu"></i>
-          </button>
-          <Link to="/" className="flex items-center gap-2">
-            <span className="text-lg font-semibold text-gray-200">GameMate</span>
+    <header className="bg-base-100 shadow">
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between p-3 lg:px-8"
+        aria-label="Global"
+      >
+        {/* Left：Logo */}
+        <div className="flex lg:flex-1">
+          <Link to="/" className="-m-1.5 p-1.5 flex items-center gap-2">
+            <span className="text-lg font-bold bg-base-100">GameMate</span>
           </Link>
         </div>
 
-        {/* Right Actions */}
-        <div className="flex items-center gap-4">
+        {/* Mobile 漢堡選單按鈕 */}
+        <div className="flex lg:hidden">
+          <button
+            type="button"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <span className="sr-only">Open main menu</span>
+            <i data-feather="menu"></i>
+          </button>
+        </div>
+
+        {/* menu */}
+        <Menu navLinks={NAV_LINKS} />
+
+        {/* Right：使用者元件 */}
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-4">
           <ThemeSwitcher />
           <NotificationDropdown />
           <UserDropdown token={token} onLogout={() => dispatch(logout())} />
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Nav */}
-      {isOpen && (
-        <div className="sm:hidden bg-black border-t shadow">
-          <div className="px-4 py-2 space-y-1">
-            <NavLink to="/" className="block py-2" onClick={() => setIsOpen(false)}>首頁</NavLink>
-            <NavLink to="/about" className="block py-2" onClick={() => setIsOpen(false)}>關於我們</NavLink>
-            <NavLink to="/dashboard" className="block py-2" onClick={() => setIsOpen(false)}>控制台</NavLink>
-            {token ? (
-              <button
-                type="button"
-                onClick={() => {
-                  dispatch(logout());
-                  setIsOpen(false);
-                }}
-                className="block w-full text-left py-2 text-red-600"
-              >
-                登出
-              </button>
-            ) : (
-              <Link to="/login" onClick={() => setIsOpen(false)} className="block py-2">
-                登入
-              </Link>
-            )}
-          </div>
-        </div>
-      )}
+      {/* Mobile menu */}
+      <MobileMenu
+        NAV_LINKS={NAV_LINKS}
+        isOpen={isOpen}
+        token={token}
+        onLogout={() => dispatch(logout())}
+        onClose={() => setIsOpen(false)}
+      />
     </header>
   );
 }

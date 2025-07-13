@@ -7,17 +7,29 @@ export default function NotificationDropdown() {
   }, []);
 
   return (
-    <div className="relative group">
-      <button className="pc-head-link relative">
-        <i data-feather="bell" />
-        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">3</span>
-      </button>
-      <div className="hidden group-hover:block absolute right-0 mt-2 w-[320px] max-h-[calc(100vh-150px)] overflow-y-auto bg-black rounded shadow p-4 z-50">
-        <h4 className="font-bold mb-3">Notifications</h4>
-        <div className="space-y-3">
-          <div className="text-sm">🔔 UI/UX Design updated.</div>
-          <div className="text-sm">📧 New message received.</div>
-          <div className="text-sm">🔒 Security alert triggered.</div>
+    <div className="hidden lg:flex lg:gap-x-12">
+      <div className="dropdown dropdown-end">
+        <div
+          tabIndex={0}
+          role="button"
+          className="btn btn-ghost btn-circle avatar"
+        >
+          <i data-feather="bell" />
+          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">
+            3
+          </span>
+        </div>
+        <div
+          tabIndex={0}
+          className="card card-compact dropdown-content bg-base-100 z-1 mt-3 w-52 shadow"
+        >
+          <div className="card-body">
+            <span className="text-lg font-bold">3 則通知</span>
+            <span className="text-info">有三位用戶右滑您的檔案</span>
+            <div className="card-actions">
+              <button className="btn btn-primary btn-block">查看</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
